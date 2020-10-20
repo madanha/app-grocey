@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Grocery</title>
+	<title>Groceries</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style>
-		/* Defaults */
+		/* Defaults: links, buttons, svg; */
 		*{
 			padding: 0;
 			margin: 0;
@@ -30,12 +30,13 @@
 		[rbtn][fgc="dark"] svg{
 			fill: black;
 			stroke: black;}
+		/* End of Defaults */
 		html{
 			width: 100%;
 			height: 100%;
 			font-family: verdana;}
-			body{
-			    display: grid;
+			body{ 
+				display: grid;
 				width: 100%;
 				max-width: 480px;
 				height: 100%;
@@ -46,263 +47,207 @@
 					height: 100%;
 					width:100%;
 					grid-area: a;}
-			#popup{
-				z-index: 2;
-				background-color: white;
-				grid-template-rows: 65px 1fr 65px;
-				height: 100%;
-				width: 100%;}
-				#popup_header{
-					/*background-color: red;*/
-					display: grid;
-					grid-template-columns: min-content 1fr;
-					padding: 10px;
-					grid-gap: 10px;
-					align-items: center;}
-				#popup_main ul > li{ 
-						display: grid;
-						grid-template-columns: 1fr min-content;
-						height: 100%;
-						width: 100%;
-						grid-gap: 10px;
-						padding: 10px;
-						border-bottom: 1px solid #eee;
-						align-items: center; }
-				#popup_footer{ 
-					padding: 10px;
-					height: 100%;
-					width: 100%;
-					background-color: red;}
-					#popup_footer > button{ 
-						width: inherit;
-						height: inherit; }
 
-				#popup div > input{ 
-					height: 35px; }
-			#popup.off{
-				display: none;}
-			#main_wrapper{
-				display: grid;
-				grid-template-areas: "a" "b";
-				grid-template-rows: 1fr 65px;}
-				#main_wrapper > div{ 
-					grid-area: a;}
-					#list_wrapper{
+					/*main_wrapper*/
+					#main_wrapper{ 
 						display: grid;
-						grid-template-rows: 65px 1fr;}
-						#list_wrapper > header{
+						width: 100%;
+						grid-template-areas: "b";
+						grid-template-columns: 1fr;}
+					#main_wrapper > div{ 
+						height: 100%;
+						width:100%;
+						grid-area: b; }
+						/*list wrapper*/
+						#list_wrapper{ 
 							display: grid;
-							grid-template-columns: 1fr min-content;
+							grid-template-rows: 65px 1fr 65px;
+							height: 100%;
+							width: 100%;
+							padding: 10px;
 							grid-gap: 10px;
-							align-items: center;
-							padding: 0 15px;}
-							#list_wrapper header > div{
-								width: 100%;
-								height: 35px;}
-							#list_wrapper header div > input{ 
-								width: 100%;
-								height: 35px;}
-						#list_wrapper ul{
-							/*background-color:  pink;*/}
-							#list_wrapper ul > li{ 
+							background-color: white;}
+							#list_wrapper header{
 								display: grid;
 								grid-template-columns: 1fr min-content;
-								grid-gap: 10px;
+								height: 100%;
+								width: 100%;
 								padding: 10px;
+								grid-gap: 10px;
+								align-items: center;
+								border-radius: 20px;
 								border-bottom: 1px solid #eee;
-								align-items: center; }	
-					#cart_wrapper{}
-					#cart_wrapper.off{ 
-						display: none;}
-			#main_wrapper > footer{ 
-				padding: 10px;
-				height: 100%;
-				width: 100%;
-				background-color: red;}
-				#main_wrapper footer > button{ 
-					width: inherit;
-					height: inherit; }
+								background-color: #eee; }
+								#list_wrapper header > input{ 
+									height: 35px;
+									outline: none;
+									border-style: none;
+									border-bottom: 1px solid black;
+									background-color: #eee;}
+							#list_wrapper main{
+								height: 100%;
+								width: 100%;
+								/*overflow: hidden;*/
+								/*background-color: pink;*/ }
+								#list_wrapper main ul > li{ 
+									display: grid;
+									grid-template-columns: 1fr min-content;
+									padding: 10px;
+									grid-gap: 10px;
+									align-items: center;
+									border-bottom: 1px solid #eee;
+									overflow-y: scroll;} 
+							#list_wrapper footer{ background-color: white; }
+						#list_wrapper footer > button{ 
+							height: 100%;
+							width: 100%;
+							padding: 10px;
+							border-radius: none;
+							align-items: center; }
+						#list_wrapper footer button >svg { 
+							width: 35px; }
+						#list_wrapper footer button > label{
+							font-size: 40px; }
+
+						/* Cart wrapper*/
+						#cart_wrapper.off{ display: none;}
+						#cart_wrapper{ 
+							display: grid;
+							grid-template-rows: 65px 1fr 65px;
+							height: 100%;
+							width: 100%;
+							padding: 10px;
+							grid-gap: 10px;
+							background-color: white;}
+							#cart_wrapper > header{ 
+								display: grid;
+								grid-template-columns: min-content 1fr;
+								padding: 10px;
+								grid-gap: 10px;
+								border-radius: 20px;
+								align-items: center;
+								background-color: #eee; }
+								#cart_wrapper header > input{ 
+									outline: none;
+									height: 35px;
+									border-style: none;
+									border-bottom: 1px solid black;
+									background-color: #eee; }
+							#cart_wrapper > main{background-color: white; }
+							#cart_wrapper main ul > li{ 
+								display: grid;
+								grid-template-columns: 1fr repeat(3, min-content);
+								height: 100%;
+								width: 100%;
+								padding: 10px;
+								grid-gap: 10px;
+								align-items: center;
+								border-bottom: 1px solid #eee; }
+
+
+							#cart_wrapper > footer{ background-color: white; }
+							#cart_wrapper footer > button{
+								height: 100%;
+								width: 100%;  }
+					/*Pop up */
+					#popup{ background-color: pink; }
+					#popup.off{ display: none;}
+					
 
 	</style>
 </head>
 <body>
-	<div class="off" id="popup">
-		<!-- header -->
-		<div id="popup_header">
-			<button rbtn fgc="dark">
-				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-					 viewBox="0 0 443.52 443.52" style="enable-background:new 0 0 443.52 443.52;" xml:space="preserve">
-					<path d="M336.226,209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132,0.42c-6.388,6.614-6.388,17.099,0,23.712l192.734,192.734
-						L107.294,414.391c-6.663,6.664-6.663,17.468,0,24.132c6.665,6.663,17.468,6.663,24.132,0l204.8-204.8
-						C342.889,227.058,342.889,216.255,336.226,209.591z"/>
-				</svg>
-			</button>
-			<input type="search" name="search" placeholder="Search">
-		</div>
-		<!-- main / list of groceries -->
-		<div id="popup_main">
-			<ul>
-				<li>
-					<label>Matches</label>
-					<button rbtn fgc="light">
-						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-							 viewBox="0 0 443.52 443.52" style="enable-background:new 0 0 443.52 443.52;" xml:space="preserve">
-							<path d="M336.226,209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132,0.42c-6.388,6.614-6.388,17.099,0,23.712l192.734,192.734
-								L107.294,414.391c-6.663,6.664-6.663,17.468,0,24.132c6.665,6.663,17.468,6.663,24.132,0l204.8-204.8
-								C342.889,227.058,342.889,216.255,336.226,209.591z"/>
-						</svg>
-					</button>
-				</li>
-				<li>
-					<label>Matches</label>
-					<button rbtn fgc="light">
-						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-							 viewBox="0 0 443.52 443.52" style="enable-background:new 0 0 443.52 443.52;" xml:space="preserve">
-							<path d="M336.226,209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132,0.42c-6.388,6.614-6.388,17.099,0,23.712l192.734,192.734
-								L107.294,414.391c-6.663,6.664-6.663,17.468,0,24.132c6.665,6.663,17.468,6.663,24.132,0l204.8-204.8
-								C342.889,227.058,342.889,216.255,336.226,209.591z"/>
-						</svg>
-					</button>
-				</li>
-				<li>
-					<label>Matches</label>
-					<button rbtn fgc="light">
-						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-							 viewBox="0 0 443.52 443.52" style="enable-background:new 0 0 443.52 443.52;" xml:space="preserve">
-							<path d="M336.226,209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132,0.42c-6.388,6.614-6.388,17.099,0,23.712l192.734,192.734
-								L107.294,414.391c-6.663,6.664-6.663,17.468,0,24.132c6.665,6.663,17.468,6.663,24.132,0l204.8-204.8
-								C342.889,227.058,342.889,216.255,336.226,209.591z"/>
-						</svg>
-					</button>
-				</li>
-				<li>
-					<label>Matches</label>
-					<button rbtn fgc="light">
-						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-							 viewBox="0 0 443.52 443.52" style="enable-background:new 0 0 443.52 443.52;" xml:space="preserve">
-							<path d="M336.226,209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132,0.42c-6.388,6.614-6.388,17.099,0,23.712l192.734,192.734
-								L107.294,414.391c-6.663,6.664-6.663,17.468,0,24.132c6.665,6.663,17.468,6.663,24.132,0l204.8-204.8
-								C342.889,227.058,342.889,216.255,336.226,209.591z"/>
-						</svg>
-					</button>
-				</li>
-				<li>
-					<label>Matches</label>
-					<button rbtn fgc="light">
-						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-							 viewBox="0 0 443.52 443.52" style="enable-background:new 0 0 443.52 443.52;" xml:space="preserve">
-							<path d="M336.226,209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132,0.42c-6.388,6.614-6.388,17.099,0,23.712l192.734,192.734
-								L107.294,414.391c-6.663,6.664-6.663,17.468,0,24.132c6.665,6.663,17.468,6.663,24.132,0l204.8-204.8
-								C342.889,227.058,342.889,216.255,336.226,209.591z"/>
-						</svg>
-					</button>
-				</li>
-				<li>
-					<label>Matches</label>
-					<button rbtn fgc="light">
-						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-							 viewBox="0 0 443.52 443.52" style="enable-background:new 0 0 443.52 443.52;" xml:space="preserve">
-							<path d="M336.226,209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132,0.42c-6.388,6.614-6.388,17.099,0,23.712l192.734,192.734
-								L107.294,414.391c-6.663,6.664-6.663,17.468,0,24.132c6.665,6.663,17.468,6.663,24.132,0l204.8-204.8
-								C342.889,227.058,342.889,216.255,336.226,209.591z"/>
-						</svg>
-					</button>
-				</li>
-			</ul>
-		</div>
+	<!-- the body has two main wrappers, the main wrapper and the popup wrapper
+		popup wrapper contains all the list of prices and thats where the user can choose which items they want
 
-		<!-- Footer -->
-		<div id="popup_footer">
-			<button>
-				<label>Cart</label>
-				<label>$300</label>
-			</button>
-		</div>
-
-	</div>
-	<div id="main_wrapper">
+	 -->
+	<div id="main_wrapper"> 
+		<!-- Main wrapper contains two wrappers list wrapper and cart wrapper -->
+		<!-- list wrapper has the list of all the available groceries. -->
 		<div id="list_wrapper">
 			<header>
-				<div>
-					<input type="search" name="search" placeholder="Search">
-				</div>
-				<button rbtn fgc="dark">
-					<svg version= xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-						 width="485.01px" height="485.01px" viewBox="0 0 485.01 485.01" style="enable-background:new 0 0 485.01 485.01;"
-						 xml:space="preserve">
-							<rect x="123.93" y="36.613" width="361.08" height="251.339"/>
-							<polygon points="0,13.666 0,59.566 55.08,59.566 55.08,356.802 485.01,356.802 485.01,310.902 100.98,310.902 100.98,13.666"/>
-							<circle cx="136.935" cy="424.679" r="46.665"/>
-							<circle cx="404.686" cy="424.679" r="46.665"/>
+				<input type="search" name="search" placeholder="Search">
+				<button rbtn fgc="light">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+						<path d="M0 0h24v24H0z" fill="none"/>
+						<path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
 					</svg>
-
 				</button>
 			</header>
-			<ul>
-				<li>
-					<label>Matches</label>
-					<button rbtn fgc="light">
-						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-							 viewBox="0 0 443.52 443.52" style="enable-background:new 0 0 443.52 443.52;" xml:space="preserve">
-							<path d="M336.226,209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132,0.42c-6.388,6.614-6.388,17.099,0,23.712l192.734,192.734
-								L107.294,414.391c-6.663,6.664-6.663,17.468,0,24.132c6.665,6.663,17.468,6.663,24.132,0l204.8-204.8
-								C342.889,227.058,342.889,216.255,336.226,209.591z"/>
-						</svg>
-					</button>
-				</li>
-				<li>
-					<label>Matches</label>
-					<button rbtn fgc="light">
-						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-							 viewBox="0 0 443.52 443.52" style="enable-background:new 0 0 443.52 443.52;" xml:space="preserve">
-							<path d="M336.226,209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132,0.42c-6.388,6.614-6.388,17.099,0,23.712l192.734,192.734
-								L107.294,414.391c-6.663,6.664-6.663,17.468,0,24.132c6.665,6.663,17.468,6.663,24.132,0l204.8-204.8
-								C342.889,227.058,342.889,216.255,336.226,209.591z"/>
-						</svg>
-					</button>
-				</li>
-				<li>
-					<label>Matches</label>
-					<button rbtn fgc="light">
-						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-							 viewBox="0 0 443.52 443.52" style="enable-background:new 0 0 443.52 443.52;" xml:space="preserve">
-							<path d="M336.226,209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132,0.42c-6.388,6.614-6.388,17.099,0,23.712l192.734,192.734
-								L107.294,414.391c-6.663,6.664-6.663,17.468,0,24.132c6.665,6.663,17.468,6.663,24.132,0l204.8-204.8
-								C342.889,227.058,342.889,216.255,336.226,209.591z"/>
-						</svg>
-					</button>
-				</li>
-				<li>
-					<label>Matches</label>
-					<button rbtn fgc="light">
-						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-							 viewBox="0 0 443.52 443.52" style="enable-background:new 0 0 443.52 443.52;" xml:space="preserve">
-							<path d="M336.226,209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132,0.42c-6.388,6.614-6.388,17.099,0,23.712l192.734,192.734
-								L107.294,414.391c-6.663,6.664-6.663,17.468,0,24.132c6.665,6.663,17.468,6.663,24.132,0l204.8-204.8
-								C342.889,227.058,342.889,216.255,336.226,209.591z"/>
-						</svg>
-					</button>
-				</li>
-				<li>
-					<label>Matches</label>
-					<button rbtn fgc="light">
-						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-							 viewBox="0 0 443.52 443.52" style="enable-background:new 0 0 443.52 443.52;" xml:space="preserve">
-							<path d="M336.226,209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132,0.42c-6.388,6.614-6.388,17.099,0,23.712l192.734,192.734
-								L107.294,414.391c-6.663,6.664-6.663,17.468,0,24.132c6.665,6.663,17.468,6.663,24.132,0l204.8-204.8
-								C342.889,227.058,342.889,216.255,336.226,209.591z"/>
-						</svg>
-					</button>
-				</li>
-			</ul>
+			<main>
+				<ul>
+					<li>
+						<label>Cooking oil</label>
+						<button rbtn fgc="dark">
+							<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+								 viewBox="0 0 443.52 443.52" style="enable-background:new 0 0 443.52 443.52;" xml:space="preserve">
+								<path d="M336.226,209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132,0.42c-6.388,6.614-6.388,17.099,0,23.712l192.734,192.734
+									L107.294,414.391c-6.663,6.664-6.663,17.468,0,24.132c6.665,6.663,17.468,6.663,24.132,0l204.8-204.8
+									C342.889,227.058,342.889,216.255,336.226,209.591z"/>
+							</svg>
+
+						</button>
+					</li>
+				
+				</ul>
+			</main>
+			<footer>
+				<button >
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+						<path d="M0 0h24v24H0z" fill="none"/>
+						<path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+					</svg>
+					<label>$500</label>
+				</button>
+			</footer>
 		</div>
-		<div class="of" id="cart_wrapper"></div>
-		<footer>
-			<button>
-				<label>Cart</label>
-				<label>$300</label>
-			</button>
-		</footer>
+		<!-- cart wrapper contains items selected by the user, the user will be able to edit and delete items from this list-->
+		<div class="off" id="cart_wrapper">
+			<header>
+				<button rbtn fgc="light">
+					<svg  enable-background="new 0 0 64 64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+						<path d="m54 30h-39.899l15.278-14.552c.8-.762.831-2.028.069-2.828-.761-.799-2.027-.831-2.828-.069l-17.448 16.62c-.755.756-1.172 1.76-1.172 2.829 0 1.068.417 2.073 1.207 2.862l17.414 16.586c.387.369.883.552 1.379.552.528 0 1.056-.208 1.449-.621.762-.8.731-2.065-.069-2.827l-15.342-14.552h39.962c1.104 0 2-.896 2-2s-.896-2-2-2z"/>
+					</svg>
+				</button>
+				<input type="search" name="search_chart" placeholder="Search">
+			</header>
+			<main>
+				<ul>
+					<li>
+						<!-- list item contains label, edit button, delete button,  -->
+						<label>Grains</label>
+						<label>$100</label>
+						<button rbtn fgc="dark">
+							<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+								 viewBox="0 0 477.873 477.873" style="enable-background:new 0 0 477.873 477.873;" xml:space="preserve">
+									<path d="M392.533,238.937c-9.426,0-17.067,7.641-17.067,17.067V426.67c0,9.426-7.641,17.067-17.067,17.067H51.2
+										c-9.426,0-17.067-7.641-17.067-17.067V85.337c0-9.426,7.641-17.067,17.067-17.067H256c9.426,0,17.067-7.641,17.067-17.067
+										S265.426,34.137,256,34.137H51.2C22.923,34.137,0,57.06,0,85.337V426.67c0,28.277,22.923,51.2,51.2,51.2h307.2
+										c28.277,0,51.2-22.923,51.2-51.2V256.003C409.6,246.578,401.959,238.937,392.533,238.937z"/>
+									<path d="M458.742,19.142c-12.254-12.256-28.875-19.14-46.206-19.138c-17.341-0.05-33.979,6.846-46.199,19.149L141.534,243.937
+										c-1.865,1.879-3.272,4.163-4.113,6.673l-34.133,102.4c-2.979,8.943,1.856,18.607,10.799,21.585
+										c1.735,0.578,3.552,0.873,5.38,0.875c1.832-0.003,3.653-0.297,5.393-0.87l102.4-34.133c2.515-0.84,4.8-2.254,6.673-4.13"/>
+							</svg>
+						</button>
+						<button rbtn fgc="dark">
+							<svg enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+								<path id="XMLID_1089_" d="m428.332 135.275-11.167-33.466c-2.248-6.736-8.552-11.278-15.653-11.278h-291.024c-7.101 0-13.405 4.543-15.653 11.278l-11.167 33.466c-2.53 7.582 3.113 15.414 11.106 15.414h322.451c7.994 0 13.637-7.832 11.107-15.414z"/>
+								<path id="XMLID_835_" d="m135.615 491.767c1.28 11.519 11.016 20.233 22.606 20.233h193.718c11.59 0 21.326-8.715 22.606-20.233l34.565-311.077h-308.06z"/>
+								<path id="XMLID_831_" d="m225.89 42.998c0-7.167 5.831-12.998 12.998-12.998h44.189c7.167 0 12.998 5.831 12.998 12.998v17.533h30v-17.533c0-23.709-19.289-42.998-42.998-42.998h-44.189c-23.709 0-42.998 19.289-42.998 42.998v17.533h30z"/>
+							</svg>
+						</button> 
+					</li>
+					
+				</ul>
+			</main>
+			<footer>
+				<button>
+					Checkout
+				</button>
+			</footer>
+		</div>
 	</div>
+	<div class="off" id="popup"></div>
+	
 </body>
 </html>
