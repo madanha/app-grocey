@@ -75,14 +75,22 @@
 								padding: 10px;
 								grid-gap: 10px;
 								align-items: center;
-								border-radius: 20px;
+								/*border-radius: 20px;*/
 								border-bottom: 1px solid #eee;
-								background-color: #eee; }
-								#list_wrapper header > input{ 
+								/*background-color: #eee;*/ }
+								#list_wrapper header div{ 
+									height: 35px;
+									border-radius: 10px;
+									background-color: #eee;
+									 }
+								#list_wrapper header div > input{ 
 									height: 35px;
 									outline: none;
 									border-style: none;
-									border-bottom: 1px solid black;
+									padding: 10px;
+									border-radius: 10px;
+									width: 100%;
+									/*border-bottom: 1px solid black;*/
 									background-color: #eee;}
 							#list_wrapper main{
 								height: 100%;
@@ -126,12 +134,18 @@
 								grid-gap: 10px;
 								border-radius: 20px;
 								align-items: center;
-								background-color: #eee; }
-								#cart_wrapper header > input{ 
+								/*background-color: #eee;*/ }
+								#cart_wrapper header > div{ 
+									height: 35px;
+									border-radius: 10px;
+									background-color: #eee;}
+								#cart_wrapper header div > input{ 
 									outline: none;
 									height: 35px;
+									width: 100%;
+									padding: 10px;
+									border-radius: 10px;
 									border-style: none;
-									border-bottom: 1px solid black;
 									background-color: #eee; }
 							#cart_wrapper > main{background-color: white; }
 							#cart_wrapper main ul > li{ 
@@ -166,7 +180,7 @@
 		<!-- list wrapper has the list of all the available groceries. -->
 		<div id="list_wrapper">
 			<header>
-				<input type="search" name="search" placeholder="Search">
+				<div><input type="search" name="search" placeholder="Search"></div>
 				<button rbtn fgc="light">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 						<path d="M0 0h24v24H0z" fill="none"/>
@@ -202,14 +216,14 @@
 			</footer>
 		</div>
 		<!-- cart wrapper contains items selected by the user, the user will be able to edit and delete items from this list-->
-		<div class="off" id="cart_wrapper">
+		<div class="of" id="cart_wrapper">
 			<header>
 				<button rbtn fgc="light">
 					<svg  enable-background="new 0 0 64 64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
 						<path d="m54 30h-39.899l15.278-14.552c.8-.762.831-2.028.069-2.828-.761-.799-2.027-.831-2.828-.069l-17.448 16.62c-.755.756-1.172 1.76-1.172 2.829 0 1.068.417 2.073 1.207 2.862l17.414 16.586c.387.369.883.552 1.379.552.528 0 1.056-.208 1.449-.621.762-.8.731-2.065-.069-2.827l-15.342-14.552h39.962c1.104 0 2-.896 2-2s-.896-2-2-2z"/>
 					</svg>
 				</button>
-				<input type="search" name="search_chart" placeholder="Search">
+				<div><input type="search" name="search_chart" placeholder="Search"></div>
 			</header>
 			<main>
 				<ul>
