@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Grocery</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style type="text/css">
+			/* Defaults */
+			*{
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;}
+			a{
+				text-decoration: none;
+				text-decoration-style: none;
+				color:#80aaff;}
+			::-webkit-scrollbar{
+				display: none;}
+			[rbtn]{
+				height: 35px;
+				width: 35px;
+				border-radius: 50%;
+				border-style: none;}
+			[rbtn] svg{width: 14px;}
+			[rbtn][fgc="light"]{background-color: black;}
+			[rbtn][fgc="dark"]{background-color: white;}
+			[rbtn][fgc="light"] svg{
+				fill: white;
+				stroke: white;}
+			[rbtn][fgc="dark"] svg{
+				fill: black;
+				stroke: black;}
+			/* End of Defaults */
+			html{
+				width: 100%;
+				height: 100%;
+				font-family: verdana;}
+				body{ 
+					display: grid;
+					grid-template-areas: "a";
+					width: 100%;
+					max-width: 480px;
+					height: 100%;
+					border-right: 1px solid black;}
+					body > div{
+						grid-area: a;
+						width: 100%;
+						height: 100%;}
+					#popup_wrapper{
+						background-color: rgba(255,255,255,0.3);
+						z-index: 3;}
+					#popup_wrapper.off{
+						display: none;}
+					#main_wrapper{
+						display: grid;
+						width: 100%;
+						max-width: 480px;
+						height: 100%;
+						grid-template-areas: "a" "b";
+						grid-template-rows: 1fr 65px;}
+						#main_wrapper > div{ 
+							display: grid;
+							grid-template-rows: 65px 1fr;
+							height: 100%;
+							grid-area: a;
+							overflow-y: hidden;}
+							#main_wrapper > div > header{
+								display: grid;
+								padding: 0 10px;
+								grid-gap: 10px;
+								align-items: center;
+								border-bottom: 1px solid #eee;}
+								#main_wrapper > div div{
+									height: 35px;
+									border-radius: 10px;
+									background-color: #eee;
+									display: grid;
+									align-items: center;
+									padding: 0 10px;} 
+								#main_wrapper > div input{
+									outline: none;
+									border-style: none;
+									background-color: inherit;}
+							#main_wrapper > div ul{
+								overflow: scroll;
+								padding: 0 10px;}
+								#main_wrapper > div li{
+									display: grid;
+									height: 60px;
+									padding: 0 0 0 5px;
+									grid-gap: 10px;
+									align-items: center;
+									border-bottom: 1px solid #eee;
+									font-size: 14px;}
+						/*#list_wrapper{}*/
+							#list_wrapper header{
+								grid-template-columns: 1fr min-content;}
+							/*#list_wrapper ul{}*/
+								#list_wrapper li{ 
+									grid-template-columns: 1fr min-content;} 	
+						#cart_wrapper{
+							background-color: white;
+							z-index: 2;}
+						#cart_wrapper.off{
+							display: none;}
+							#cart_wrapper header{
+								grid-template-columns: min-content 1fr;}
+							/*#cart_wrapper ul{}*/
+								#cart_wrapper li{ 
+									grid-template-columns: 1fr repeat(3,min-content);}
+									#cart_wrapper label:nth-child(4){
+										font-size: 10px;
+										color: white;
+										font-weight: bold;
+										background-color: green;
+										padding: 5px 10px;
+										border-radius: 20px;}
+						footer{
+							border-top: 1px solid #eee;
+							display: grid;
+							grid-template-columns: min-content 1fr min-content;
+							grid-gap: 10px;
+							align-items: center;
+							padding: 0 20px;
+							background-color: black;
+							color:white;}
+							footer svg{
+								width: 24px;
+								fill:white;}
+							footer label:nth-child(3){
+								font-size: 12px;
+								font-weight: bold;
+								background-color: green;
+								padding: 5px 10px;
+								border-radius: 20px;}					
+		</style>
+	</head>
+	<body>
+		<div id="popup_wrapper" class="off"></div>
+		<div id="main_wrapper">
+			<div id="list_wrapper">
+				<header>
+					<div>
+						<input type="search" name="search" placeholder="Search">
+					</div>
+					<button rbtn fgc="light" onclick="openCart()">
+						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 26 26">
+							<path d="M25.856,10.641C21.673,19.5,20.312,19.5,19.5,19.5h-8c-2.802,0-4.949-1.648-5.47-4.2
+								c-0.016-0.078-1.6-7.853-2.005-10.025C3.826,4.21,3.32,3.5,1.5,3.5C0.671,3.5,0,2.829,0,2s0.671-1.5,1.5-1.5
+								c3.02,0,4.964,1.5,5.474,4.224c0.401,2.149,1.98,9.898,1.996,9.977c0.319,1.566,1.722,1.8,2.53,1.8h7.605
+								c0.817-0.878,2.679-4.261,4.038-7.141c0.354-0.749,1.249-1.068,1.997-0.716C25.89,8.997,26.21,9.891,25.856,10.641z M10.5,20.5
+								C9.119,20.5,8,21.619,8,23s1.119,2.5,2.5,2.5S13,24.381,13,23S11.881,20.5,10.5,20.5z M19.5,20.5c-1.381,0-2.5,1.119-2.5,2.5
+								s1.119,2.5,2.5,2.5S22,24.381,22,23S20.881,20.5,19.5,20.5z M14.663,12.344c0.1,0.081,0.223,0.12,0.346,0.12
+								s0.244-0.039,0.346-0.12c0.1-0.079,2.828-2.74,4.316-4.954c0.115-0.172,0.126-0.392,0.028-0.574
+								c-0.095-0.181-0.285-0.295-0.49-0.295h-2.226c0,0-0.217-4.291-0.359-4.49c-0.206-0.294-1.057-0.494-1.616-0.494
+								c-0.561,0-1.427,0.2-1.634,0.494c-0.141,0.198-0.328,4.49-0.328,4.49h-2.255c-0.206,0-0.395,0.114-0.492,0.295
+								c-0.097,0.182-0.086,0.403,0.028,0.574C11.816,9.605,14.564,12.265,14.663,12.344z"/>
+						</svg>
+					</button>
+				</header>
+				<ul>
+					<li>
+						<label>Cooking oil</label>
+						<button rbtn fgc="dark">
+							<svg transform="rotate(-90)" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 292.362 292.362">
+								<path d="M286.935,69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952,0-9.233,1.807-12.85,5.424
+									C1.807,72.998,0,77.279,0,82.228c0,4.948,1.807,9.229,5.424,12.847l127.907,127.907c3.621,3.617,7.902,5.428,12.85,5.428
+									s9.233-1.811,12.847-5.428L286.935,95.074c3.613-3.617,5.427-7.898,5.427-12.847C292.362,77.279,290.548,72.998,286.935,69.377z"/>
+							</svg>
+						</button>
+					</li>
+				</ul>
+			</div>
+			<div id="cart_wrapper" class="of">
+				<header>
+					<button rbtn fgc="light" onclick="closeCart()">
+						<svg enable-background="new 0 0 64 64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+							<path stroke-width="5" d="m54 30h-39.899l15.278-14.552c.8-.762.831-2.028.069-2.828-.761-.799-2.027-.831-2.828-.069l-17.448 16.62c-.755.756-1.172 1.76-1.172 2.829 0 1.068.417 2.073 1.207 2.862l17.414 16.586c.387.369.883.552 1.379.552.528 0 1.056-.208 1.449-.621.762-.8.731-2.065-.069-2.827l-15.342-14.552h39.962c1.104 0 2-.896 2-2s-.896-2-2-2z"/>
+						</svg>
+					</button>
+					<div>
+						<input type="search" name="search" placeholder="Search">
+					</div>
+				</header>
+				<ul>
+					<li>
+						<label>Grains</label>
+						<button rbtn fgc="dark">
+							<svg enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+								<path d="m428.332 135.275-11.167-33.466c-2.248-6.736-8.552-11.278-15.653-11.278h-291.024c-7.101 0-13.405 4.543-15.653 11.278l-11.167 33.466c-2.53 7.582 3.113 15.414 11.106 15.414h322.451c7.994 0 13.637-7.832 11.107-15.414z"/>
+								<path d="m135.615 491.767c1.28 11.519 11.016 20.233 22.606 20.233h193.718c11.59 0 21.326-8.715 22.606-20.233l34.565-311.077h-308.06z"/>
+								<path d="m225.89 42.998c0-7.167 5.831-12.998 12.998-12.998h44.189c7.167 0 12.998 5.831 12.998 12.998v17.533h30v-17.533c0-23.709-19.289-42.998-42.998-42.998h-44.189c-23.709 0-42.998 19.289-42.998 42.998v17.533h30z"/>
+							</svg>
+						</button> 
+						<button rbtn fgc="dark">
+							<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 477.873 477.873">
+								<path d="M392.533,238.937c-9.426,0-17.067,7.641-17.067,17.067V426.67c0,9.426-7.641,17.067-17.067,17.067H51.2
+									c-9.426,0-17.067-7.641-17.067-17.067V85.337c0-9.426,7.641-17.067,17.067-17.067H256c9.426,0,17.067-7.641,17.067-17.067
+									S265.426,34.137,256,34.137H51.2C22.923,34.137,0,57.06,0,85.337V426.67c0,28.277,22.923,51.2,51.2,51.2h307.2
+									c28.277,0,51.2-22.923,51.2-51.2V256.003C409.6,246.578,401.959,238.937,392.533,238.937z"/>
+								<path d="M458.742,19.142c-12.254-12.256-28.875-19.14-46.206-19.138c-17.341-0.05-33.979,6.846-46.199,19.149L141.534,243.937
+									c-1.865,1.879-3.272,4.163-4.113,6.673l-34.133,102.4c-2.979,8.943,1.856,18.607,10.799,21.585
+									c1.735,0.578,3.552,0.873,5.38,0.875c1.832-0.003,3.653-0.297,5.393-0.87l102.4-34.133c2.515-0.84,4.8-2.254,6.673-4.13"/>
+							</svg>
+						</button>
+						<label>$100</label>
+					</li>
+				</ul>
+			</div>
+			<footer>
+				<svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+					<path d="m8.75 17.612v4.638c0 .324.208.611.516.713.077.025.156.037.234.037.234 0 .46-.11.604-.306l2.713-3.692z"/>
+					<path d="m23.685.139c-.23-.163-.532-.185-.782-.054l-22.5 11.75c-.266.139-.423.423-.401.722.023.3.222.556.505.653l6.255 2.138 13.321-11.39-10.308 12.419 10.483 3.583c.078.026.16.04.242.04.136 0 .271-.037.39-.109.19-.116.319-.311.352-.53l2.75-18.5c.041-.28-.077-.558-.307-.722z"/>
+				</svg>
+				<label>Checkout</label>
+				<label>$500</label>
+			</footer>
+		</div>
+	</body>
+	<script>
+		var cart_wrapper = document.getElementById('cart_wrapper');
+		function closeCart(){
+			cart_wrapper.classList.add("off");
+		}
+		function openCart(){
+			cart_wrapper.classList.remove("off");
+		}
+	</script>
+</html>
